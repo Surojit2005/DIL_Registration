@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DIL Season 8 Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        img {
+            width: 200px;
+            margin: 20px 0;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>DIL Season 8 Registration</h2>
+    <p>Pay ₹50 via QR code to join Dinos Inter League (BGMI Tournament)</p>
+    <img src="qr.jpg" alt="Scan QR to Pay ₹50">
+
+    <h3>Enter your Email to receive the Registration Form:</h3>
+    <input type="email" id="email" placeholder="Your Email Address" required>
+    <button onclick="sendEmail()">Submit</button>
+
+    <p style="font-size: 12px;">Note: Check your spam folder if you don't receive the form within 5 minutes.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+
+    (function(){
+        emailjs.init("QHzWW460RFgoKDSRU");  // Replace with your EmailJS Public Key
+    })();
+
+    function sendEmail() {
+        const email = document.getElementById('email').value;
+        if (!email.includes('@')) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        emailjs.send("service_jju4t56", "template_3j1jau1", {
+            to_email: email
+        })
+        .then(() => {
+            alert("Registration form sent to your email. Please check your inbox.");
+            document.getElementById('email').value = '';
+        }, (err) => {
+            alert("Failed to send email. Please try again later.");
+            console.error(err);
+        });
+    }
+</script>
+
+</body>
+</html>
